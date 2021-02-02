@@ -1,0 +1,3 @@
+- This is a discrete simulation I created which simulates an airplane check-in terminal.  It has multiple servers and two queues, one for business class customers and one for economy class customers.
+- The simulation runs twice.  The first time, business class servers can only serve business class passengers, and the second time, business class servers can server both kinds of passengers provided there are no business class passengers in the queue.
+- The text file 500.txt is an example input file.  The first number on each line is the time the passenger arrives.  The second is the passenger type, and the third is the time it will take to serve them. 
