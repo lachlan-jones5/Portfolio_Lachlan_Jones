@@ -1,0 +1,2 @@
+- This is a simulation of a stack.  It implements common stack mechanisms such as push and pop.
+- The stack doubles in size if it is too small, and is meant to somewhat simulate dynamic memory (however, no 'memory shinkage' is accounted for)
