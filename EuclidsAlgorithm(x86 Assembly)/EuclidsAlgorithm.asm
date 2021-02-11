@@ -2,8 +2,6 @@
 ; eax = variable1
 ; ebx = variable2
 
-; Create a function that finds the GCD and saves the result in eax before returning
-
 euclidsAlgorithm:
 
 	push	ecx			; Preserve registers
