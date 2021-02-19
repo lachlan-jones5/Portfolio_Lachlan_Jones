@@ -1,0 +1,1 @@
+- This program finds the longest increaasing subsequence in a set of given numbers.  Currently, it is only written in C#, but I plan to write it in x86 Assembly as well.
