@@ -8,37 +8,43 @@ int main()
 
     int n;
     scanf("%d", &n);
-    int length = n + (n - 1) - 1, cl_index = 0, rev_index = 0, removal_pos = 0;
-    int curr_line[n];
-    int rev[n * length];
+
+    int length = n + (n - 1), removal_pos = 0, neg_counter = 0, add_pos = length - 1;
 
     for (int i = 0; i < length/2 + 1; i++){
 
-        for (int j = 0; j < n; j++){
+        for (int j = 0; j < length; j++){
 
-            curr_line[cl_index++] = n;
-            rev[rev_index++] = n;
-            printf("%d ", n);
+            printf("%d ", n - neg_counter);
+            if (j < removal_pos) ++neg_counter;
+            if (j >= add_pos) --neg_counter;
 
         }
 
-        for (int k = n - 1; k > 0; k--){
+        ++removal_pos;
+        --add_pos;
 
-            rev[rev_index++] = n;
-            printf("%d ", curr_line[k]); 
-
-        } 
+        neg_counter = 0;
 
         printf("\n");
-        cl_index = 0;
-
-        removal_pos++;
 
     }
 
-    for (int j = 0; j < (length + 1) - (length/2 + 1); j++){
+    for (int x = 0; x < length/2; x++){
 
-        for (int k = 0; k < length + 1; k++) printf("%d ", n);
+        for (int j = 0; j < length; j++){
+
+            printf("%d ", n - neg_counter);
+            if (j >= removal_pos) --neg_counter;
+            if (j < add_pos) ++neg_counter;
+
+        }
+
+        ++removal_pos;
+        --add_pos;
+
+        neg_counter = 0;
+
         printf("\n");
 
     }
@@ -46,17 +52,3 @@ int main()
     return 0;
 
 }
-
-/*
-
- 5 5 5 5 5 5 5 5 5
- 5 4 4 4 4 4 4 4 5
- 5 4 3 3 3 3 3 4 5
- 5 4 3 2 2 2 3 4 5
- 5 4 3 2 1 2 3 4 5
- 5 4 3 2 2 2 3 4 5
- 5 4 3 3 3 3 3 4 5
- 5 4 4 4 4 4 4 4 5
- 5 5 5 5 5 5 5 5 5
-
-*/
