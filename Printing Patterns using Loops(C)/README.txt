@@ -16,5 +16,5 @@ To compile:
 
 To run
 
-./out
-<input an integer 1 <= n <= 1000>
+    ./out
+    <input an integer 1 <= n <= 1000>
