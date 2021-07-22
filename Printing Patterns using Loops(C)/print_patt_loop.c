@@ -8,44 +8,55 @@ int main()
 
     int n;
     scanf("%d", &n);
+    int length = n + (n - 1) - 1, cl_index = 0, rev_index = 0, removal_pos = 0;
+    int curr_line[n];
+    int rev[n * length];
 
-    // Initialise variables
-    int limit = n + (n-1), switch_counter = 0, out_index = 0, neg_counter = 0, rev_index = 0;
-    int mid = n - 1;
-    int out[n];
-    char reverse[(limit * 2 + 1) * ((n - 1) * 2)];
+    for (int i = 0; i < length/2 + 1; i++){
 
-    // Perform printing calculations
-    for (int i = 0; i < n; i++){
-            
         for (int j = 0; j < n; j++){
-                
-            if (j <= switch_counter && j != 0) ++neg_counter;
-            out[out_index++] = n - neg_counter;
-            printf("%d ", out[out_index - 1]);
-            reverse[rev_index++] = n + '0';
-            reverse[rev_index++] = ' ';
-                
+
+            curr_line[cl_index++] = n;
+            rev[rev_index++] = n;
+            printf("%d ", n);
+
         }
-        
-        for (int x = out_index - 1; x > 0; x--){
-                
-            printf("%d ", out[x]);
-            reverse[rev_index++] = n + '0';
-            reverse[rev_index++] = ' ';
-                
-        }
-        
-        reverse[rev_index++] = '\n';
-        ++switch_counter;
-        out_index = 0;
+
+        for (int k = n - 1; k > 0; k--){
+
+            rev[rev_index++] = n;
+            printf("%d ", curr_line[k]); 
+
+        } 
+
         printf("\n");
-    
+        cl_index = 0;
+
+        removal_pos++;
+
     }
 
-    for (int x = 0; x < rev_index - limit + 2; x++)
-        printf("%c", reverse[x]);
-    
+    for (int j = 0; j < (length + 1) - (length/2 + 1); j++){
+
+        for (int k = 0; k < length + 1; k++) printf("%d ", n);
+        printf("\n");
+
+    }
+
     return 0;
 
 }
+
+/*
+
+ 5 5 5 5 5 5 5 5 5
+ 5 4 4 4 4 4 4 4 5
+ 5 4 3 3 3 3 3 4 5
+ 5 4 3 2 2 2 3 4 5
+ 5 4 3 2 1 2 3 4 5
+ 5 4 3 2 2 2 3 4 5
+ 5 4 3 3 3 3 3 4 5
+ 5 4 4 4 4 4 4 4 5
+ 5 5 5 5 5 5 5 5 5
+
+*/
