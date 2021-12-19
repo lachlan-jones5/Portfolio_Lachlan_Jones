@@ -12,4 +12,12 @@ It is a semester-long project made up of 5 different assignments addressing diff
 You can view the course here: https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-035-computer-language-engineering-spring-2010/projects/
 
 It is currently a work in progress as I work through the course.
+It should also be noted that certain files were not written by me. Any file written by myself with have the following header:
+
+/*
+
+  Written by Lachlan Jones
+  December 2021
+
+*/
 </p>
