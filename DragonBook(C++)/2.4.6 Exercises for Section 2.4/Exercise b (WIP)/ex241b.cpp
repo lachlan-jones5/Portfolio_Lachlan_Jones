@@ -1,36 +1,36 @@
 /*
 
-  This program is my attempt at answering the first question (question a) in the "Exercises for Section 2.4" in the book "Compilers: Principles, Techniques & Tools"
+  This program is my attempt at answering the second question (question b) in the "Exercises for Section 2.4" in the book "Compilers: Principles, Techniques & Tools"
 
   This program is a recursive-descent parser for the grammar with the following productions:
   
-    S -> +SS | -SS | a
+    S -> S(S)S | (sigma)
 
   To use this program, create a text file with a string that is either a member of this grammar or not.
 
   Legal strings:
 
-    a
-    +aa
-    -+aa-aa
-    +a+a+a+a-aa
-    -aa
+    (empty string)
+    ()
+    ()()
+    ()(())()
+    (())
 
   Illegal Strings:
 
-    aa
-    aa-
-    xyz
-    poo
-    9133
+    )(
+    (()
+    ()(
+    (((()
+    ))))
 
   To compile:
 
-    clang++ ex241a.cpp -o ex241a
+    clang++ ex241b.cpp -o ex241b
 
   To run:
 
-    ./ex241a <filename>
+    ./ex241b <filename>
 
   If the file contains a legal string, the program will print "[COMPLETE]: The file was parsed successfully".
   
@@ -38,8 +38,8 @@
 
   A bash script for testing all the given test files is also included. You can run it using the following commands:
 
-    chmod 755 ex241a.sh
-    ./ex241a.sh
+    chmod 755 ex241b.sh
+    ./ex241b.sh
 
 */
 #include <iostream>
@@ -74,18 +74,12 @@ void stmt(char& lookahead, int& counter, fstream& sourceCode){
 
   switch(lookahead){
 
-    case '+':
+    case '(':
+      stmt(lookahead, counter, sourceCode);
       match(lookahead, counter, sourceCode);
       stmt(lookahead, counter, sourceCode);
-      stmt(lookahead, counter, sourceCode);
-      break;
-    case '-':
       match(lookahead, counter, sourceCode);
       stmt(lookahead, counter, sourceCode);
-      stmt(lookahead, counter, sourceCode);
-      break;
-    case 'a':
-      match(lookahead, counter, sourceCode);
       break;
     default:
       syntaxError(counter);
@@ -100,7 +94,7 @@ int main(int argc, char** argv){
   // Ensure that a filename has been entered
   if (argc != 2){
 
-    cerr << "[USAGE]:\n\t./ex241a <filename>\n";
+    cerr << "[USAGE]:\n\t./ex241b <filename>\n";
     return 1;
 
   }
