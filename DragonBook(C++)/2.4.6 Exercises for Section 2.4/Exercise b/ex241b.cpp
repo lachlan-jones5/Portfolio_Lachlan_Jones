@@ -4,7 +4,12 @@
 
   This program is a recursive-descent parser for the grammar with the following productions:
   
-    S -> S(S)S | (sigma)
+    S -> S(S)S | (epsilon)
+
+  This grammar is actually impossible to program due to the left recursion problem stated in the book (Section 2.4.5). An equivalent (and programmable) grammar is as follows:
+
+    S -> R
+    R -> (S)S | (epsilon)
 
   To use this program, create a text file with a string that is either a member of this grammar or not.
 
@@ -75,11 +80,16 @@ void stmt(char& lookahead, int& counter, fstream& sourceCode){
   switch(lookahead){
 
     case '(':
-      stmt(lookahead, counter, sourceCode);
       match(lookahead, counter, sourceCode);
       stmt(lookahead, counter, sourceCode);
       match(lookahead, counter, sourceCode);
       stmt(lookahead, counter, sourceCode);
+      break;
+    case ')':
+      break;
+    case 10:
+      break;
+    case 0:
       break;
     default:
       syntaxError(counter);
@@ -116,7 +126,7 @@ int main(int argc, char** argv){
   stmt(lookahead, counter, sourceCode); // Calling this recursive function parsing in the string
 
   // If we haven't reached the end of the string but the parsing process is complete, then this string is malformed
-  if (lookahead != 10) syntaxError(counter);
+  if (lookahead != 10 && lookahead != 0) syntaxError(counter);
 
   // If we make it to the end of the program, then the string is a legal string
   cout << "[COMPLETE]: The file was parsed successfully" << endl;
