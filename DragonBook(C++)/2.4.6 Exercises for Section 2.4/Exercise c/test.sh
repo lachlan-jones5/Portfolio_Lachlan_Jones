@@ -1,4 +1,4 @@
 #!/bin/bash
 
-clang++ ex241b.cpp -o ex241b
-./ex241b.sh
+clang++ ex241c.cpp -o ex241c
+./ex241c.sh

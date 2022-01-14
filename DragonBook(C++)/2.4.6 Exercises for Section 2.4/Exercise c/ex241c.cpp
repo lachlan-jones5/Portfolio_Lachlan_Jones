@@ -4,38 +4,33 @@
 
   This program is a recursive-descent parser for the grammar with the following productions:
   
-    S -> S(S)S | (epsilon)
-
-  This grammar is actually impossible to program due to the left recursion problem stated in the book (Section 2.4.5). An equivalent (and programmable) grammar is as follows:
-
-    S -> R
-    R -> (S)S | (epsilon)
+    S -> 0S1 | 01
 
   To use this program, create a text file with a string that is either a member of this grammar or not.
 
   Legal strings:
 
-    (empty string)
-    ()
-    ()()
-    ()(())()
-    (())
+    01
+    0011
+    000111
+    00000001111111
+    00001111
 
   Illegal Strings:
 
-    )(
-    (()
-    ()(
-    (((()
-    ))))
+    10
+    001
+    1000
+    0101
+    11001011
 
   To compile:
 
-    clang++ ex241b.cpp -o ex241b
+    clang++ ex241c.cpp -o ex241c
 
   To run:
 
-    ./ex241b <filename>
+    ./ex241c <filename>
 
   If the file contains a legal string, the program will print "[COMPLETE]: The file was parsed successfully".
   
@@ -43,8 +38,8 @@
 
   A bash script for testing all the given test files is also included. You can run it using the following commands:
 
-    chmod 755 ex241b.sh
-    ./ex241b.sh
+    chmod 755 ex241c.sh
+    ./ex241c.sh
 
 */
 #include <iostream>
@@ -79,13 +74,12 @@ void stmt(char& lookahead, int& counter, fstream& sourceCode){
 
   switch(lookahead){
 
-    case '(':
+    case '0':
       match(lookahead, counter, sourceCode);
       stmt(lookahead, counter, sourceCode);
       match(lookahead, counter, sourceCode);
-      stmt(lookahead, counter, sourceCode);
       break;
-    case ')':
+    case '1':
       break;
     case 10:
       break;
@@ -104,7 +98,7 @@ int main(int argc, char** argv){
   // Ensure that a filename has been entered
   if (argc != 2){
 
-    cerr << "[USAGE]:\n\t./ex241b <filename>\n";
+    cerr << "[USAGE]:\n\t./ex241c <filename>\n";
     return 1;
 
   }
