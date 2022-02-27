@@ -1,13 +1,9 @@
-fun first_element (x::xs) = x
-fun second_element(x::y::xs) = y
-fun evenly(odd::even::xs) = even::evenly xs
-    | evenly [odd] = []
-    | evenly [] = []
+(* Pattern matching is a funky part of functional programming.  It is an
+   alternative to if-sentences.  The fibonacci function can be rewritten: *)
 
-val listA = [10, 11, 12]
-val firstElement = first_element listA
-(* (* The case expression can also be used to pattern match and return a value *)
-datatype temp =
-      C of real
-    | F of real     
-*)
+fun first_elem (x::xs) = x
+fun second_elem (x::y::xs) = y
+fun evenly_positioned_elems (odd::even::xs) = even::evenly_positioned_elems xs
+  | evenly_positioned_elems [odd] = []  (* Base case: throw away *)
+  | evenly_positioned_elems []    = []  (* Base case *)
+val xb = evenly_positioned_elems [11, 12, 13, 14]
