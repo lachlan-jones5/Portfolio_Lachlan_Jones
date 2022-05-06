@@ -1,9 +1,23 @@
-(* Pattern matching is a funky part of functional programming.  It is an
-   alternative to if-sentences.  The fibonacci function can be rewritten: *)
+datatype temp = C of real | F of real
+val t: temp = C 45.0
 
-fun first_elem (x::xs) = x
-fun second_elem (x::y::xs) = y
-fun evenly_positioned_elems (odd::even::xs) = even::evenly_positioned_elems xs
-  | evenly_positioned_elems [odd] = []  (* Base case: throw away *)
-  | evenly_positioned_elems []    = []  (* Base case *)
-val xb = evenly_positioned_elems [11, 12, 13, 14]
+fun temp_to_f t = 
+    case t of
+        C x => x * 1.8 + 32.0
+    |   F x => x
+
+val new = temp_to_f t
+
+(* ------- *)
+
+fun rgbToTup {b, g, r} = (r, g, b)
+val y = {r = 1, b = 2, g = 3}
+val p = rgbToTup y
+val num  = #r y : int
+val printnum = Int.toString(num) ^ "\n"
+val _ = print printnum
+
+(* Higher order functions: Functions can take other functions as arguments.
+   Functions are just other kinds of values, and functions don't need names
+   to exist.  Functions without names are called "anonymous functions" or
+   lambda expressions or closures (since they also have a lexical scope). *)
